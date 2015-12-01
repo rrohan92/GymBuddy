@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Diet</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/grid_12.css">
+    <link rel="stylesheet" href="styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="styles/kendo.default.min.css" />
+    <link rel="stylesheet" href="styles/kendo.dataviz.min.css" />
+    <link rel="stylesheet" href="styles/kendo.dataviz.default.min.css" />
+     <script src="js/jquery.min.js"></script>
+    <script src="js/kendo.all.min.js"></script>
+    <script src="js/cufon-yui.js"></script>
+    <script src="js/Asap_400.font.js"></script>
+    <script src="js/Coolvetica_400.font.js"></script>
+	<script src="js/Kozuka_M_500.font.js"></script>
+    <script src="js/cufon-replace.js"></script>
+    <script src="js/FF-cash.js"></script>
+	<!--[if lt IE 8]>
+       <div style=' clear: both; text-align:center; position: relative;'>
+         <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+           <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+        </a>
+      </div>
+    <![endif]-->
+    <!--[if lt IE 9]>
+   		<script type="text/javascript" src="js/html5.js"></script>
+    	<link rel="stylesheet" type="text/css" media="screen" href="css/ie.css">
+	<![endif]-->
+</head>
+<body>
+<div class="main">
+	<div class="bg-img"></div>
+<!--==============================header=================================-->
+    <header>
+        <h1><a href="index.html">Gym <strong>Buddy</strong></a></h1>
+        <nav>
+        	<div class="social-icons">
+            	<a href="#" class="icon-2"></a>
+            	<a href="#" class="icon-1"></a>
+            </div>
+            <ul class="menu" style="position:relative; left:-85px">
+                <li><a href="timetable.html">Track</a></li>
+                <li><a href="trainings.html">Connect</a></li>
+                <li class="current"><a href="nutrition.html">Diet</a></li>
+                <li><a href="contacts.html">Edit</a></li>
+                <li><a href="gallery.html">Help</a></li>
+                <li><a href="index.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>  
+<!--==============================content================================-->
+    <section id="content">
+  <div id="example" style="position:relative; right:-300px; top:25px">
+
+
+            <div class="demo-section k-header">
+               <h2 class="p3" style="position:relative; right:-100px">
+                        <span class="color-1">Diet Information</h2> 
+                <p>
+                    <label for="Breakfast">Breakfast:</label><input id="categories" style="width: 270px" />
+                </p>
+                <p>
+                    <label for="Lunch">Lunch:</label><input id="products"  style="width: 270px" />
+                </p>
+                <p>
+                    <label for="Dinner">Dinner:</label><input id="orders"  style="width: 270px" />
+                </p>
+                  <p>
+                    <label for="Others">Other:</label><input id="Others" style="width: 270px" />
+                </p>
+                <button class="k-button" onClick="#" style="position:relative; left:-50px">Submit</button>
+                <button class="k-button" onClick="#" style="position:relative; left:-130px">Share</button>
+                 <button class="k-button" onClick="Home.html" style="position:relative; left:120px; top: -43.5px">Cancel</button>
+            </div>
+
+            <style scoped>
+                .demo-section {
+                    width: 400px;
+                }
+                .demo-section p {
+                    margin-top: 1em;
+                }
+                .demo-section label {
+                    display: inline-block;
+                    width: 100px;
+                    padding-right: 5px;
+                    text-align: right;
+                }
+                .demo-section .k-button {
+                    margin: 1em 0 0 105px;
+                }
+                .k-readonly
+                {
+                    color: gray;
+                }
+            </style>
+
+            <script>
+                $(document).ready(function() {
+                    var categories = $("#categories").kendoDropDownList({
+                        optionLabel: "Select",
+                        dataTextField: "CategoryName",
+                        dataValueField: "CategoryID",
+                        dataSource: {
+                            type: "odata",
+                            serverFiltering: true,
+                            transport: {
+                                read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                            }
+                        }
+                    }).data("kendoDropDownList");
+
+                    var products = $("#products").kendoDropDownList({
+                        autoBind: false,
+                        
+                        optionLabel: "Select",
+                        dataTextField: "ProductName",
+                        dataValueField: "ProductID",
+                        dataSource: {
+                            type: "odata",
+                            serverFiltering: true,
+                            transport: {
+                                read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                            }
+                        }
+                    }).data("kendoDropDownList");
+
+                    var orders = $("#orders").kendoDropDownList({
+                        autoBind: false,
+                      
+                        optionLabel: "Select",
+                        dataTextField: "Order.ShipCity",
+                        dataValueField: "OrderID",
+                        dataSource: {
+                            type: "odata",
+                            serverFiltering: true,
+                            transport: {
+                                read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Order_Details?$expand=Order"
+                            }
+                        }
+                    }).data("kendoDropDownList");
+					
+					var orders = $("#Others").kendoDropDownList({
+                        autoBind: false,
+                       
+                        optionLabel: "Select",
+                        dataTextField: "Order.ShipCity",
+                        dataValueField: "OrderID",
+                        dataSource: {
+                            type: "odata",
+                            serverFiltering: true,
+                            transport: {
+                                read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Order_Details?$expand=Order"
+                            }
+                        }
+                    }).data("kendoDropDownList");
+
+                   
+
+                       
+                   
+                });
+            </script>
+        </div>
+        <img src="images/diet.jpg" width="308" height="253" style="position:relative; top:-240px; left:-50px">
+        <img src="images/sensa-diet-plan-scam.jpg" width="390" height="250" style="position:relative; 
+        left:400px; top:-240px">
+</div>
+    </section> 
+    
+<!--==============================footer=================================-->
+   	
+    
+
+</body>
+</html>
